@@ -1,0 +1,30 @@
+version: '2'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  install:
+    cmds:
+      - npm install
+    sources:
+      - package.json
+      - package-lock.json
+    method: checksum
+  build:
+    deps: [install]
+    cmds:
+      - npm run build
+    sources:
+      - src/**/*.ts
+    generates:
+      - dist
+  test:
+    cmds:
+      - npm test
+    sources:
+      - src/**/*.ts
+  default:
+    deps: [build]
+    cmds:
+      - node dist/index.js
