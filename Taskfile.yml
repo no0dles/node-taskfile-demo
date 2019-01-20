@@ -1,8 +1,5 @@
 version: '2'
 
-vars:
-  GREETING: Hello, World!
-
 tasks:
   install:
     cmds:
@@ -28,3 +25,9 @@ tasks:
     deps: [build]
     cmds:
       - node dist/index.js
+  docker:build:
+    cmds:
+      - docker build -t no0dles/node-taskfile-demo .
+  docker:publish:
+    cmds:
+      - docker push no0dles/node-taskfile-demo
